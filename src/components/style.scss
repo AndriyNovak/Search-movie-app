@@ -36,33 +36,60 @@ body{
   // @include padding_margin(0,0) ;
   // box-sizing: border-box;
 }
-
+#main-wrap{
+  width: 100%;
+  @include flex(center,center,column, nowrap);
+}
 p{
   // @include padding_margin(0,0) ;
 }
 header{
-  @include flex(flex-start,center,row, nowrap);
+  @include flex(flex-start,center,row, wrap);
   
   width: 100%;
   height: auto;
   background: linear-gradient(45deg, rgb(32, 240, 84), rgb(9, 147, 211));
   form{
     width: 100%;
+    min-width: 300px;
     height: auto;
    
-    @include flex(center,center,row, nowrap);
+    @include flex(center,center,row, wrap);
     @include padding_margin(0 , 10px) ;
-    input{
-      @include padding_margin(5px 5px 5px 5px , 0) ;
-  
+    .years-select, .SortBy-select, .Genres-select, .Search{
+      @include padding_margin(0 , 0 20px 0 20px) ;
     }
+    .wrap-for-select{
+      @include flex(center,space-between,row, wrap);
+      
+      // width: 80%;
+      // min-width: 300px;
+    }
+    .Search{
+      // width: 40%;
+      min-width: 300px;
+    }
+    .search-input{
+      @include padding_margin(5px 5px 5px 10px , 0) ;
+      
+    }
+    
   }
 }
 main{
   
   @include flex(flex-start,center,row, wrap);
-  
+  // background-image: url("/img/demonstration2.jpg") ;
+  background: lightblue;
+  // background-repeat: no-repeat;
+  // background-position: 100%;
+  // background-attachment: scroll;
+  width: 100%;
+  height: auto;
 }
+
+
+
 .wrap{
   @include flex(flex-start,center,column, nowrap);
   width: 100%;
@@ -71,42 +98,43 @@ main{
 .filmBlock{
   @include flex(flex-start,flex-start,row, nowrap);
   width: 40%;
-  
-  
+  background:white;
   overflow-y: hidden;
+  text-overflow:ellipsis;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  height: 290px;
+  height: 300px;
   @include padding_margin(0 0 20px 0,1.5%) ;
   .overview{
     width: 60%;
     @include flex(flex-start,center,column, nowrap);
     @include padding_margin(20px 20px 20px 0, 0) ;
+    
     .title{
-      width: 100%;
-     
+      width: 100%;     
       font-weight: 600;
       font-size: 1.1em;
       line-height: 1.1em;
     }
-    .forOverview::after{
-      content: "..";
+    // .forOverview::after{
+    //   content: "..";
       
-      
-      
-    }
-    .forOverview{
+    // }
+    p.forOverview{
       word-wrap: break-word;
       white-space: normal;
       color: #4d4d4d;
       font-size: 0.9em;
       line-height: 1.2em;
-     
+      overflow-y: hidden;
+      text-overflow:ellipsis;
+      height: 155px;
     }
     .genders{
       @include flex(flex-start,flex-start,row, wrap);
       p{
         line-height: 0.5em;
         font-size: 14px;
+        
         &::after{
           content:"/";
         }
@@ -122,3 +150,16 @@ main{
   }
 }
 
+.navigation{
+  @include padding_margin(0,0 auto  ) ;
+  @include flex(center,center,column, wrap);
+  background: lightblue;
+  width: 100%;
+}
+
+
+@media screen and (max-width:1000px){
+  main{
+    @include flex(flex-start,center,column, wrap);
+  }
+}

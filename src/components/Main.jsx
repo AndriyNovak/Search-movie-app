@@ -11,7 +11,7 @@ export class Main extends React.Component {
     
     poster(poster){
         if(poster===null){
-            return (<img className="poster" src="../img/noLoad.jpg" alt=""/>);
+            return (<img className="poster" src="/img/noLoad.jpg" alt=""/>);
         }else return(
             <img className="poster" src={`https://image.tmdb.org/t/p/w200/${poster}`} alt=""/>
         )
