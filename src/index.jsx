@@ -1,22 +1,24 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Main} from "./components/Main.jsx";
+import {Main} from "./components/Main.jsx"; //Если создаешь Main компонент, то пусть он содержит весь реакт код, а то не понятно почему он так называется 
 import "./components/style.scss";
 
 const API = "5874acfd11651a28c55771624f7021f4";
 
-let arr_pagination = [1,2,3,4,5,6,7,8,9];
+// В джаваскрипте принято называть переменные camleCase
+let arr_pagination = [1,2,3,4,5,6,7,8,9]; 
 let arr_Year_select = [];
 let pageNumber=1;
 let arr_pag_pages = [];
 let count_pag =0;
 let count_pag_2=0;
 
+//Лучше вынести в функцию getYearSelectArray или тип того
 for(let y=1900;y<2020;y++){
     arr_Year_select.push(y);
 }
-arr_Year_select = arr_Year_select.reverse();
+arr_Year_select = arr_Year_select.reverse(); // Сделай фор let y=2020;y>1900;y--
 
  class App extends React.Component {
     constructor(props,state){
@@ -87,7 +89,8 @@ arr_Year_select = arr_Year_select.reverse();
         
     }
     async request(pageNumber,year,sort,gender,inputText)  {
-       let type ,query, primary_release_year_value,
+        // вынести в функцию getUrl
+       let type ,query, primary_release_year_value, 
        with_genres_value ,sort_by_value; 
        if (inputText!==""){
         type = "search";
@@ -105,9 +108,11 @@ arr_Year_select = arr_Year_select.reverse();
         sort_by_value = `sort_by=${sort}`;
        }
        
+        //С большой буквы называют только классы
         const Request = await fetch(`https://api.themoviedb.org/3/${type}/movie?api_key=${API}&${query}&page=${pageNumber}&${sort_by_value}&${with_genres_value}&${primary_release_year_value}`);
         const data = await Request.json();
         console.log(data); 
+        //Что тут происходит??
         data.results.map((elem,i)=>{
             this.setState({                
                 currentPage:pageNumber,                
@@ -218,6 +223,7 @@ arr_Year_select = arr_Year_select.reverse();
                 <div className="wrap">
                  
                 <header >
+                    //Это все должно быть отдельным компонентом
                         <form action="" >
                              
                             <div className="wrap-for-select">
@@ -248,6 +254,7 @@ arr_Year_select = arr_Year_select.reverse();
                             <div className="Genres-select">
                                 <p>Genres</p>
                                 <select className="form-control"  onChange={this.handleGenresSelectChange.bind(this)}>
+                                    //опшены должны генерироваться через мап а не писаться руками
                                     <option value="28" >Action</option>
                                     <option value="12">Adventure</option>
                                     <option value="16">Animation</option>
@@ -298,7 +305,7 @@ arr_Year_select = arr_Year_select.reverse();
     
     
                    
-                    
+                    // Отдельный компонент
                     {this.showPagination()}
                 </div>
             )
